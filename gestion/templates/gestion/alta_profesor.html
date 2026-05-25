@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if profesor %}Editar{% else %}Registrar{% endif %} Profesor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-sm border-0 w-100" style="max-width: 550px;">
+            
+            <div class="card-header bg-success text-white p-3 d-flex justify-content-between align-items-center">
+                <h4 class="m-0 fw-bold">
+                    {% if profesor %}✏️ Editar Profesor{% else %}➕ Registrar Profesor{% endif %}
+                </h4>
+                <a href="/profesores/" class="btn btn-sm btn-light fw-bold text-secondary">Cancelar</a>
+            </div>
+
+            <div class="card-body p-4">
+                {% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+                <form method="POST">
+                    {% csrf_token %} <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary">Número de Nómina</label>
+                        <input type="text" name="nomina" class="form-control" placeholder="Ej: PROFE-01" required
+                               value="{% if profesor %}{{ profesor.nomina }}{% endif %}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary">Nombre(s)</label>
+                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Mario" required
+                               value="{% if profesor %}{{ profesor.nombre }}{% endif %}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary">Apellido(s)</label>
+                        <input type="text" name="apellido" class="form-control" placeholder="Ej: Ortiz" required
+                               value="{% if profesor %}{{ profesor.apellidos }}{% endif %}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-secondary">Correo Electrónico</label>
+                        <input type="email" name="email" class="form-control" placeholder="ejemplo@escuela.com" required
+                               value="{% if profesor %}{{ profesor.email }}{% endif %}">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success fw-bold py-2 shadow-sm">
+                            Guardar Profesor
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

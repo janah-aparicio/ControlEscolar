@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carga Académica de Grupos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-4">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-dark fw-bold">Control de Grupos y Horarios</h2>
+            <div>
+                <a href="/grupos/nuevo/" class="btn btn-primary fw-bold me-2 shadow-sm">+ Armar Grupo</a>
+                <a href="/horarios/nuevo/" class="btn btn-outline-success fw-bold shadow-sm">+ Registrar Horario</a>
+                <a href="/periodos/nuevo/" class="btn btn-outline-info text-dark fw-bold shadow-sm">+ Registrar Periodo</a>
+                <a href="/" class="btn btn-secondary">← Volver al Inicio</a>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-3">Grupo</th>
+                            <th>Materia</th>
+                            <th>Profesor Asignado</th>
+                            <th>Aula / Horario asignado</th>
+                            <th class="text-center" style="width: 200px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for g in grupos %}
+                        <tr>
+                            <td class="ps-3 fw-bold text-primary">{{ g.nombre }}</td>
+                            <td>{{ g.materia.nombre }}</td>
+                            <td>{{ g.profesor.nombre }} {{ g.profesor.apellidos }}</td>
+                            <td><span class="badge bg-secondary">{{ g.aula.nombre }}</span> — {{ g.horario.dia }}</td>
+                            <td class="text-center">
+                                <a href="/grupos/editar/{{ g.id }}/" class="btn btn-sm btn-warning fw-bold me-1">✏️ Editar</a>
+                                <a href="/grupos/eliminar/{{ g.id }}/" class="btn btn-sm btn-danger fw-bold">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">No hay grupos estructurados actualmente.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

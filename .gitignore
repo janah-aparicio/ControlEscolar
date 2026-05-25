@@ -1,0 +1,9 @@
+# Base de datos y credenciales
+db.sqlite3
+.env
+*.env
+
+# Carpetas de Python
+__pycache__/
+venv/
+staticfiles/
